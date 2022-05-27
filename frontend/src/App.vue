@@ -122,8 +122,13 @@ export default class App extends Vue {
     }
     return true;
   }
-  login(){
+  async login(){
     console.log('login', this.loginEmail, this.loginPw);
+
+    const { data } = await this.axios.post('users/login', {
+        email: this.loginEmail,
+        password: this.loginPw,
+    });
   }
 
 }

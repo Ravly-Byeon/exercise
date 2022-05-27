@@ -1,5 +1,0 @@
-export interface User {
-    id: string;
-    pw: string;
-    name: string;
-}
