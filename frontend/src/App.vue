@@ -80,8 +80,7 @@
           elevation="2"
         >JOIN US</v-btn>
       </div>
-
-  </v-app-bar>
+    </v-app-bar>
 
     <v-main>
       <router-view/>

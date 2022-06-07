@@ -5,6 +5,7 @@ import {LoginUserDto} from "./dto/login-user.dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {User, UserDocument} from "./schemas/user.schema";
 import {Model} from "mongoose";
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -35,7 +36,21 @@ export class UsersService {
   }
 
   async login(loginUser: LoginUserDto){
-
+    const user = await this.userModel.findOne({email: loginUser.email});
+    console.log(user,'user');
+    console.log(loginUser.password, user.password);
+    if(user){
+      /*const valid = await bcrypt.compare(loginUser.password, user.password);
+      console.log(valid, 'vv');
+      if(valid){*/
+      if(loginUser.password === user.password){
+        return user;
+      }else{
+        return 'N';
+      }
+    }else{
+      return 'N';
+    }
   }
 
 }

@@ -4,10 +4,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import {LoginUserDto} from "./dto/login-user.dto";
 import {User} from "./entities/user.entity";
+import {log} from "util";
+import {AuthsService} from "../auths/auths.service";
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+      private readonly usersService: UsersService,
+      private authsService: AuthsService,
+  ) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -37,6 +42,20 @@ export class UsersController {
   @Post('/login')
   async login(@Body() loginUser: LoginUserDto) {
     console.log(loginUser);
+    const user = await this.usersService.login(loginUser);
+    console.log(user);
+    if(user === 'N'){
+      return user;
+    }else{
+      const { access_token } = await this.authsService.signToken(loginUser);
+      console.log(access_token);
+      const data = {
+        ...loginUser,
+        access_token,
+      }
+      console.log(data);
+      return data;
+    }
   }
 
 }

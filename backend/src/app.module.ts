@@ -7,6 +7,10 @@ import {MongooseModule} from "@nestjs/mongoose";
 import {ConfigModule} from "@nestjs/config";
 import * as mongoose from 'mongoose';
 import {LoggerMiddleware} from "./common/middleware/logger.middleware";
+import {config} from "dotenv";
+import { AuthsModule } from './auths/auths.module';
+
+config();
 
 @Module({
   imports: [
@@ -14,15 +18,16 @@ import {LoggerMiddleware} from "./common/middleware/logger.middleware";
       BoardsModule,
       MongooseModule.forRoot(process.env.MONGO_URL),
       ConfigModule.forRoot(),
+      AuthsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule implements NestModule{
-    private readonly idDev: boolean = process.env.MODE === 'dev'? true: false;
+export class AppModule{
+    /*private readonly idDev: boolean = process.env.MODE === 'dev'? true: false;
 
     configure(consumer: MiddlewareConsumer){
         consumer.apply(LoggerMiddleware).forRoutes('*');
         mongoose.set('debug',this.idDev);
-    }
+    }*/
 }
