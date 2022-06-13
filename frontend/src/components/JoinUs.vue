@@ -57,12 +57,18 @@
           label="E-mail"
           required
         ></v-text-field>
-        <v-btn
+      </validation-provider>
+      <v-btn
           elevation="2"
           :disabled="emailValid"
           @click="emailSubmit"
         >이메일 인증</v-btn>
-      </validation-provider>
+      <v-text-field
+          v-if="emailSend"
+          v-model="emailVal"
+          label="E-mail 인증번호"
+          required
+        ></v-text-field>
       <validation-provider
         v-slot="{ errors }"
         name="select"
@@ -120,6 +126,8 @@ export default class JoinUs extends Vue{
   name = '';
   password = '';
   email = '';
+  emailSend = false;
+  emailVal = '';
   select = null;
   items= [
       '서울',
@@ -146,6 +154,7 @@ export default class JoinUs extends Vue{
   }
 
   async emailSubmit(){
+    this.emailSend = true;
     console.log('emailSubmit');
     const mailData = {
       name: this.name,

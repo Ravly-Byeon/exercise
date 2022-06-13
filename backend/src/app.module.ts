@@ -30,23 +30,28 @@ config();
       AuthsModule,
       EmailsModule,
       MailerModule.forRootAsync({
-          imports: [ConfigModule],
-          inject: [ConfigService],
-          useFactory: (config: ConfigService) =>{
-              console.log('====write [.env] by config: network ====');;
-              console.log(config.get('email'));
-              return {
-                  ...config.get('email'),
-                  template: {
-                      dir: path.join(__dirname, '/templates/'),
-                      adapter: new EjsAdapter(),
-                      options: {
-                          strice: true,
-                      },
+          useFactory: () =>({
+              transport: {
+                  host: 'smtp.gmail.com',
+                  port: 587,
+                  auth: {
+                      user: 'uraabb4702@gmail.com',
+                      pass: 'mpubwleuvhfwopkl'
                   },
-              };
-          },
-      }),
+              },
+              defaults: {
+                  from: '"no-reply" <uraabb4702@gmail.com>',
+              },
+              preview: true,
+              template: {
+                  dir: __dirname+'/templates',
+                  adapter: new EjsAdapter(),
+                  options: {
+                      strict: true,
+                  }
+              }
+          })
+      })
   ],
   controllers: [AppController],
   providers: [AppService],
