@@ -6,12 +6,14 @@ import {LoginUserDto} from "./dto/login-user.dto";
 import {User} from "./entities/user.entity";
 import {log} from "util";
 import {AuthsService} from "../auths/auths.service";
+import {EmailsService} from "../emails/emails.service";
 
 @Controller('users')
 export class UsersController {
   constructor(
       private readonly usersService: UsersService,
       private authsService: AuthsService,
+      private emailsService: EmailsService,
   ) {}
 
   @Post()
@@ -56,6 +58,24 @@ export class UsersController {
       console.log(data);
       return data;
     }
+  }
+
+  @Post('/emailSubmit')
+  async emailSubmit(@Body() { email, name, password }){
+    const userData = {
+      email,
+      password
+    }
+    const {access_token} = await this.authsService.signToken(userData);
+    console.log(access_token,'acct');
+    const rStr = await this.usersService.randomStr();
+    console.log(rStr,'rand');
+    await this.emailsService.emailSubmit(email, rStr);
+    const form = {
+      rStr,
+      access_token
+    }
+    return form;
   }
 
 }

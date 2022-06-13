@@ -38,7 +38,6 @@ export class UsersService {
   async login(loginUser: LoginUserDto){
     const user = await this.userModel.findOne({email: loginUser.email});
     console.log(user,'user');
-    console.log(loginUser.password, user.password);
     if(user){
       /*const valid = await bcrypt.compare(loginUser.password, user.password);
       console.log(valid, 'vv');
@@ -51,6 +50,12 @@ export class UsersService {
     }else{
       return 'N';
     }
+  }
+
+  async randomStr(){
+    const crypto = require("crypto");
+    const str = crypto.randomBytes(5).toString('hex');
+    return str;
   }
 
 }

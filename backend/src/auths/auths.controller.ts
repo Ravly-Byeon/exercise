@@ -31,4 +31,5 @@ export class AuthsController {
   remove(@Param('id') id: string) {
     return this.authsService.remove(+id);
   }
+
 }

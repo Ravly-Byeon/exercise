@@ -1,51 +1,15 @@
 <template>
-  <!-- <div class="container">
-    <div class="login-box">
-      <div class="login-title">PMI</div>
-      <v-form
-        ref="form"
-        v-model="valid"
-        lazy-validation
-      >
-        <v-text-field
-          v-model="form.id"
-          :rules="idRules"
-          label="ID"
-          required
-        ></v-text-field>
-
-        <v-text-field
-          v-model="form.pw"
-          :rules="pwRules"
-          label="비밀번호"
-          required
-        ></v-text-field>
-
-        <v-btn
-          :disabled="!valid"
-          color="primary"
-          class="mr-4"
-          width="100%"
-          @click="login"
-        >
-          로그인
-        </v-btn>
-      </v-form>
-    </div>
-  </div> -->
-
-  <v-card v-if="loginPopper">
+   <v-card v-if="loginPopper">
     <v-card-text>
       <v-text-field
         v-model="loginEmail"
-        :rules="emailRules"
-        :maxlength="30"
-        :counter="30"
-        @keydown.enter="login"
-        clearable
         label="Email"
-        :autofocus="true"
         dense
+        :autofocus="true"
+        clearable
+        :rules="emailRules"
+        @keydown.enter="login"
+        :maxlength="30"
       ></v-text-field>
     </v-card-text>
     <v-card-text>
@@ -54,7 +18,6 @@
           :rules="passwordRules"
           type="password"
           :maxlength="20"
-          :counter="20"
           @keydown.enter="login"
           clearable
           label="Password"
