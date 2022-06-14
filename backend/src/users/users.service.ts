@@ -4,7 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import {LoginUserDto} from "./dto/login-user.dto";
 import {InjectModel} from "@nestjs/mongoose";
 import {User, UserDocument} from "./schemas/user.schema";
-import {Model} from "mongoose";
+import mongoose, {Model, Schema} from "mongoose";
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -56,6 +56,30 @@ export class UsersService {
     const crypto = require("crypto");
     const str = crypto.randomBytes(5).toString('hex');
     return str;
+  }
+
+  async emailChk(userEmail:string){
+    return await this.userModel.findOne({email:userEmail, isUse:true});
+  }
+
+  async signup(userData: CreateUserDto){
+    const pw = await this.transformPW(userData.password);
+    userData.password = pw;
+    const date = new Date();
+    console.log(date);
+    const id = new mongoose.mongo.ObjectId();
+    const data = {
+      ...userData,
+      _id: id,
+      isUse: true,
+      createDt: date,
+    }
+    return await this.userModel.create({...data});
+  }
+
+  async transformPW(pw: string): Promise<string>{
+    pw = await bcrypt.hash(pw,10);
+    return pw;
   }
 
 }

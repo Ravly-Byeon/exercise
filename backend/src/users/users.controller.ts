@@ -66,16 +66,32 @@ export class UsersController {
       email,
       password
     }
-    const {access_token} = await this.authsService.signToken(userData);
-    console.log(access_token,'acct');
-    const rStr = await this.usersService.randomStr();
-    console.log(rStr,'rand');
-    await this.emailsService.emailSubmit(email, rStr);
-    const form = {
-      rStr,
-      access_token
+    const user = await this.usersService.emailChk(email);
+    if(!user){
+      const {access_token} = await this.authsService.signToken(userData);
+      console.log(access_token,'acct');
+      const rStr = await this.usersService.randomStr();
+      console.log(rStr,'rand');
+      await this.emailsService.emailSubmit(email, rStr);
+      console.log(rStr,'rsTr');
+      const form = {
+        rStr,
+        access_token
+      }
+      return form;
+    }else{
+      return 'N';
     }
-    return form;
+  }
+
+  @Post('/emailCert')
+  async emailCert(@Body(){ token, email, password}){
+    return await this.authsService.chkToken(token);
+  }
+
+  @Post('/signup')
+  async signup(@Body()userData: CreateUserDto){
+    return await this.usersService.signup(userData);
   }
 
 }

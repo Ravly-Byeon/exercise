@@ -43,4 +43,25 @@ export class AuthsService {
       access_token: this.jwtService.sign(payload)
     }
   }
+
+  async chkToken(accessToken: string){
+    const decodedToken = this.jwtService.decode(accessToken);
+    console.log(decodedToken,'***');
+
+    //decodedToken 기간 체크
+    const tokenExp = new Date(decodedToken['exp']*1000);
+    const now = new Date();
+
+    //남은 시간
+    const betweenTime = Math.floor(
+        (tokenExp.getTime() - now.getTime())/1000/60
+    );
+
+    //기간 만료
+    if(betweenTime<0){
+      return false;
+    }else{
+      return true;
+    }
+  }
 }
