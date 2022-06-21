@@ -5,9 +5,7 @@ import {InjectModel} from "@nestjs/mongoose";
 
 @Injectable()
 export class BoardsService {
-  constructor(
-  ) {
-  }
+
   create(createBoardDto: CreateBoardDto) {
     return 'This action adds a new board';
   }
@@ -29,6 +27,6 @@ export class BoardsService {
   }
 
   async categoryAll(){
-    return
+    return 'hi';
   }
 }
