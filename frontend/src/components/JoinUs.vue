@@ -167,7 +167,7 @@ export default class JoinUs extends Vue{
         nickname: this.name,
         email: this.email,
         password: this.password,
-        region: this.select
+        region: this.select,
       }
       console.log(user);
       const {data} = await this.axios.post('/users/signup',user);

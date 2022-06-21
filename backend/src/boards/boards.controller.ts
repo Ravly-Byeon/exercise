@@ -32,4 +32,10 @@ export class BoardsController {
   remove(@Param('id') id: string) {
     return this.boardsService.remove(+id);
   }
+
+  @Get('/category')
+  categoryAll() {
+    console.log('boards');
+    return this.boardsService.categoryAll();
+  }
 }

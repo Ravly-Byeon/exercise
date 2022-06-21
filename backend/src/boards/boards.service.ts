@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
+import {InjectModel} from "@nestjs/mongoose";
 
 @Injectable()
 export class BoardsService {
+  constructor(
+  ) {
+  }
   create(createBoardDto: CreateBoardDto) {
     return 'This action adds a new board';
   }
@@ -22,5 +26,9 @@ export class BoardsService {
 
   remove(id: number) {
     return `This action removes a #${id} board`;
+  }
+
+  async categoryAll(){
+    return
   }
 }

@@ -2,6 +2,11 @@ import Vue from 'vue'
 import VueRouter, { RouteConfig } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import JoinUs from "@/components/JoinUs.vue";
+import MyPageIndex from "@/views/mypage/MyPageIndex.vue";
+import MyPageInfo from "@/views/mypage/MyPageInfo.vue";
+import MyPageWishlist from "@/views/mypage/MyPageWishlist.vue";
+import MyPageMyboard from "@/views/mypage/MyPageMyboard.vue";
+import BoardWrite from "@/components/board/BoardWrite.vue";
 
 Vue.use(VueRouter)
 
@@ -23,6 +28,26 @@ const routes: Array<RouteConfig> = [
     path: '/joinUs',
     name: 'joinUs',
     component: JoinUs
+  },
+  {
+    path: '/info',
+    name: 'info',
+    component: MyPageInfo,
+  },
+  {
+    path: '/wishlist',
+    name: 'wishlist',
+    component: MyPageWishlist,
+  },
+  {
+    path: '/myboard',
+    name: 'myboard',
+    component: MyPageMyboard,
+  },
+  {
+    path: '/boardWrite',
+    name: 'boardWrite',
+    component: BoardWrite,
   }
 ]
 

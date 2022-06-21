@@ -27,8 +27,18 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    try {
+      const pw = await this.transformPW(updateUserDto.password);
+      updateUserDto.password = pw;
+      const user = this.userModel.updateOne(
+          {email: id},
+          {...updateUserDto}
+      )
+      return user;
+    }catch (e) {
+      throw new Error(e);
+    }
   }
 
   remove(id: number) {
@@ -37,16 +47,19 @@ export class UsersService {
 
   async login(loginUser: LoginUserDto){
     const user = await this.userModel.findOne({email: loginUser.email});
-    console.log(user,'user');
     if(user){
       /*const valid = await bcrypt.compare(loginUser.password, user.password);
       console.log(valid, 'vv');
       if(valid){*/
-      if(loginUser.password === user.password){
-        return user;
+      const valid = await bcrypt.compare(loginUser.password, user.password);
+      console.log(valid,'!!');
+      if(valid){
+          return user;
       }else{
         return 'N';
       }
+
+
     }else{
       return 'N';
     }
@@ -72,8 +85,9 @@ export class UsersService {
       ...userData,
       _id: id,
       isUse: true,
-      createDt: date,
+      createAt: date,
     }
+    console.log(data);
     return await this.userModel.create({...data});
   }
 
@@ -81,5 +95,6 @@ export class UsersService {
     pw = await bcrypt.hash(pw,10);
     return pw;
   }
+
 
 }

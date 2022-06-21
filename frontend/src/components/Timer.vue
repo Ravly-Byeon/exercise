@@ -9,7 +9,7 @@ import {Component, Vue} from "vue-property-decorator";
 
 @Component({})
 export default class Timer extends Vue{
-  timer = null;
+  timer: number|null = null;
   timeCounter = 300;
   timerStr = '05:00';
 
@@ -31,15 +31,16 @@ export default class Timer extends Vue{
     return interval;
   }
 
-  timerStop(timer){
-    clearInterval(timer);
+  timerStop(timers:any){
+    clearInterval(timers);
     this.timeCounter = 0;
   }
 
   prettyTime(){
     let time = this.timeCounter / 60;
-    let minutes = parseInt(time);
+    let minutes = Math.floor(time);
     let secondes = Math.round((time-minutes)*60);
+    console.log(minutes,secondes,'???');
     return `${minutes.toString().padStart(2,"0")} : ${secondes.toString().padStart(2,"0")}`;
   }
 }

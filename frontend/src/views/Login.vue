@@ -26,7 +26,7 @@
     </v-card-text>
     <v-card-actions>
       <div class="flex-grow-1"></div>
-      <v-btn @click="loginPopper = false" depressed>Cancel</v-btn>
+      <v-btn @click="loginCancel" depressed>Cancel</v-btn>
       <v-btn
         color="success"
         :disabled="!loginValidation()"
@@ -80,6 +80,15 @@ export default class LoginForm extends Vue {
       password: this.loginPw,
     });
     console.log(data,'--');
+    this.$store.dispatch('login/login',data);
+    console.log(this.$store.state.login.userEmail);
+    if(this.$store.state.login.userEmail && this.$store.state.login.isLogin){
+      this.$emit('loginPop', false);
+    }
+  }
+
+  loginCancel(){
+    this.$emit('loginPop', false);
   }
 
 }

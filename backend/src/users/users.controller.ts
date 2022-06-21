@@ -33,7 +33,7 @@ export class UsersController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
@@ -43,7 +43,7 @@ export class UsersController {
 
   @Post('/login')
   async login(@Body() loginUser: LoginUserDto) {
-    console.log(loginUser);
+    console.log(loginUser, 'controller');
     const user = await this.usersService.login(loginUser);
     console.log(user);
     if(user === 'N'){
@@ -53,6 +53,7 @@ export class UsersController {
       console.log(access_token);
       const data = {
         ...loginUser,
+        ...user,
         access_token,
       }
       console.log(data);
@@ -91,7 +92,9 @@ export class UsersController {
 
   @Post('/signup')
   async signup(@Body()userData: CreateUserDto){
+    console.log(userData);
     return await this.usersService.signup(userData);
   }
+
 
 }
