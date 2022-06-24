@@ -2,6 +2,7 @@ import {Module} from "vuex";
 import axios from "axios";
 
 interface Login {
+    userId: string,
     isLogin: boolean,
     userEmail: string,
     token: string,
@@ -11,7 +12,8 @@ interface LoginResponse{
     result: boolean,
     token: string,
     _doc: {
-        userEmail: string,
+        _id: string,
+        email: string,
         nickname: string,
     }
 }
@@ -21,18 +23,23 @@ const login ={
     state: {
         isLogin: false,
         userEmail: '',
+        userNickname: '',
+        userId: '',
         token: '',
     },
     getters: {
         isLogin: (state: any) => state.isLogin,
         userEmail: (state: any) => state.userEmail,
+        userId: (state: any) => state.userId,
+        userNickname: (state: any) => state.userNickname,
         token: (state: any) => state.token,
     },
     mutations: {
         login(state:any, payload:any){
-            const { email, access_token } = payload;
-            console.log(email,access_token);
+            const { email, access_token, _doc } = payload;
             state.isLogin = true;
+            state.userId = _doc._id;
+            state.userNickname = _doc.nickname;
             state.userEmail = email;
             state.token = access_token;
         },
@@ -40,6 +47,8 @@ const login ={
             state.isLogin = false;
             state.userEmail = '';
             state.token = '';
+            state.userId = '';
+            state.userNickname = '';
         }
     },
     actions:{

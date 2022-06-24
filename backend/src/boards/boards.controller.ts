@@ -9,6 +9,7 @@ export class BoardsController {
 
   @Post()
   create(@Body() createBoardDto: CreateBoardDto) {
+    console.log(createBoardDto.fileList);
     return this.boardsService.create(createBoardDto);
   }
 
@@ -33,9 +34,6 @@ export class BoardsController {
     return this.boardsService.remove(+id);
   }
 
-  @Get('/category')
-  categoryAll() {
-    console.log('boards');
-    return this.boardsService.categoryAll();
-  }
+
+
 }

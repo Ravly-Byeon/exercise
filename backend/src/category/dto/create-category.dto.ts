@@ -1,6 +1,6 @@
 import {IsString} from "class-validator";
 
-export class CategoryBoardDto{
+export class CreateCategoryDto {
     @IsString()
     _id: string;
 

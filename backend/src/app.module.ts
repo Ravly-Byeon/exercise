@@ -14,6 +14,9 @@ import configEmail from './config/email';
 import {MailerModule} from "@nestjs-modules/mailer";
 import * as path from "path";
 import {EjsAdapter} from "@nestjs-modules/mailer/dist/adapters/ejs.adapter";
+import { CategoryModule } from './category/category.module';
+import { UploadModule } from './upload/upload.module';
+import { ErrorModule } from './error/error.module';
 
 config();
 
@@ -46,7 +49,10 @@ config();
                   },
               };
           },
-      })
+      }),
+      CategoryModule,
+      UploadModule,
+      ErrorModule
   ],
   controllers: [AppController],
   providers: [AppService],
