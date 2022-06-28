@@ -106,6 +106,16 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col
+        cols="12"
+        >
+        <div>
+          <img
+            :src="images"/>
+        </div>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -121,6 +131,7 @@ export default class BoardWrite extends Vue{
   content='';
   files:File[] = [];
   uploadFiles: any[] = [];
+  images='';
 
   created(){
     this.categorySet();
@@ -172,6 +183,7 @@ export default class BoardWrite extends Vue{
     data.forEach((item: any)=>{
       this.uploadFiles.push(item);
     })
+    this.images = `D:\\yrbyeon\\업무 관련\\secondHanded_files${data[0].savedPath.replace('/', '\\')}`;
     this.files = [];
   }
 

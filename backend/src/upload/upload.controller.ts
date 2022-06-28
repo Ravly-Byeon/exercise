@@ -41,11 +41,6 @@ export class UploadController {
         };
         arr.push(data);
       });
-      const sendData: CreateUploadDto = {
-        files,
-        type,
-        _id_user: userId,
-      };
       return arr;
     }
 
