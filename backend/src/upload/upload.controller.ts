@@ -15,6 +15,7 @@ import { CreateUploadDto } from './dto/create-upload.dto';
 import { UpdateUploadDto } from './dto/update-upload.dto';
 import {FilesInterceptor} from "@nestjs/platform-express";
 import {ConfigService} from "@nestjs/config";
+import {multerOptions} from "../lib/multerOptions";
 
 @Controller('upload')
 export class UploadController {
@@ -23,7 +24,7 @@ export class UploadController {
       private config: ConfigService,
   ) {}
 
-  @UseInterceptors(FilesInterceptor('fileList'))
+  /*@UseInterceptors(FilesInterceptor('fileList'))
   @Post('/:type/:userId')
   create(
       @UploadedFiles() files: Array<Express.Multer.File>,
@@ -33,16 +34,19 @@ export class UploadController {
       console.log(files);
       let arr = [];
       files.forEach((file)=>{
-        let path = file.path.replace(this.config.get('ATTATCH_SAVE_PATH'),'');
+        //let path = file.path.replace(this.config.get('ATTATCH_SAVE_PATH'),'');
         const data = {
           filename: file.originalname,
-          savedPath: path.replace(/\\/gi,'/'),
+          savedPath: file.path.replace(/\\/gi,'/'),
           size: file.size,
         };
         arr.push(data);
       });
       return arr;
-    }
+    }*/
+
+  @UseInterceptors(FilesInterceptor('images', null, multerOptions))
+  @Post('/:type/:userId')
 
   @Get()
   findAll() {
