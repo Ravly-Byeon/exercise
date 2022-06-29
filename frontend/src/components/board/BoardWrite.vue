@@ -112,7 +112,11 @@
         >
         <div>
           <img
-            :src="images"/>
+            :url="images"/>
+        </div>
+        <hr/>
+        <div :style="`background-image: url(${images})`">
+
         </div>
       </v-col>
     </v-row>
@@ -132,6 +136,7 @@ export default class BoardWrite extends Vue{
   files:File[] = [];
   uploadFiles: any[] = [];
   images='';
+  imageBackgr='';
 
   created(){
     this.categorySet();
@@ -183,7 +188,7 @@ export default class BoardWrite extends Vue{
     data.forEach((item: any)=>{
       this.uploadFiles.push(item);
     })
-    this.images = `D:\\yrbyeon\\업무 관련\\secondHanded_files${data[0].savedPath.replace('/', '\\')}`;
+    this.images = `${data[0].savedPath.replace('/', '\\')}`;
     this.files = [];
   }
 

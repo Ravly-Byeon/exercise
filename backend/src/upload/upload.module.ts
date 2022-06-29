@@ -30,15 +30,13 @@ import {extname} from "path";
             }
           },
           storage: diskStorage({
-            /*destination: function (req, file, cb){
-              const dest = `${config.get('ATTATCH_SAVE_PATH')}/${format(new Date(),'{yyyy}{MM}')}/`;
+            destination: function (req, file, cb){
+              //const dest = `${config.get('ATTATCH_SAVE_PATH')}/${format(new Date(),'{yyyy}{MM}')}/`;
+              const dest = 'public';
               if(!fs.existsSync(dest))  {
                 fs.mkdirSync(dest, { recursive: true });
               }
               cb(null, dest);
-            },*/
-            destination: (req, file , cb) =>{
-
             },
             filename: (req, file, cb) =>{
               const randomName = Array(32).fill(null)

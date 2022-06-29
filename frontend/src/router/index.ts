@@ -7,6 +7,8 @@ import MyPageInfo from "@/views/mypage/MyPageInfo.vue";
 import MyPageWishlist from "@/views/mypage/MyPageWishlist.vue";
 import MyPageMyboard from "@/views/mypage/MyPageMyboard.vue";
 import BoardWrite from "@/components/board/BoardWrite.vue";
+import BoardListView from "@/views/board/BoardListView.vue";
+import SearchView from "@/views/SearchView.vue";
 
 Vue.use(VueRouter)
 
@@ -48,6 +50,16 @@ const routes: Array<RouteConfig> = [
     path: '/boardWrite',
     name: 'boardWrite',
     component: BoardWrite,
+  },
+  {
+    path:'/boardList',
+    name: 'boardList',
+    component: BoardListView,
+  },
+  {
+    path:'/searchView',
+    name: 'searchView',
+    component: SearchView,
   }
 ]
 

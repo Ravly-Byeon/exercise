@@ -5,14 +5,21 @@
       dark
     >
       <div class="d-flex align-center">
-        <v-toolbar-title>SECOND HANDED</v-toolbar-title>
+        <v-toolbar-title
+          @click="move('/')"
+        >SECOND HANDED</v-toolbar-title>
       </div>
 
       <v-spacer></v-spacer>
-      <v-btn icon dark>
+      <v-btn icon dark
+             @click="move('/searchView')"
+      >
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-      <v-btn icon dark>
+      <v-btn icon dark
+             v-if="$store.state.login.isLogin"
+             @click="move('/chatView')"
+      >
         <v-icon>mdi-chat-processing-outline</v-icon>
       </v-btn>
       <div class="d-flex align-center" v-if="!$store.state.login.isLogin">
@@ -29,7 +36,7 @@
               <v-btn
                 v-on="on"
               >
-                LOG IN {{$store.state.login.isLogin}}
+                LOG IN
               </v-btn>
             </template>
             <LoginForm
@@ -40,7 +47,7 @@
         </template>
         <v-btn
           elevation="2"
-          @click="moveJoinUs"
+          @click="move('/joinus')"
         >JOIN US
         </v-btn>
       </div>
@@ -49,7 +56,7 @@
           elevation="2"
           @click="logout"
         >
-          LOG OUT {{$store.state.login.isLogin}}
+          LOG OUT
         </v-btn>
         <template>
           <div class="text-center">
@@ -100,8 +107,7 @@ import LoginForm from "@/views/Login.vue";
   export default class Navbar extends Vue{
     private loginPopper = false;
 
-    moveJoinUs(){
-      const path = '/joinUs'
+    move(path: string){
       if (this.$route.path !== path) this.$router.push(path);
     }
 

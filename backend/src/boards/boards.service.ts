@@ -26,8 +26,10 @@ export class BoardsService {
     return await this.boardModel.create({...insertData});
   }
 
-  findAll() {
-    return `This action returns all boards`;
+  async findAll() {
+    return await this.boardModel.find({
+      isUse: true,
+    }).sort({createAt:-1}).exec();
   }
 
   findOne(id: number) {
