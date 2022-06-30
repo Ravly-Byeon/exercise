@@ -37,6 +37,7 @@ const login ={
     mutations: {
         login(state:any, payload:any){
             const { email, access_token, _doc } = payload;
+            console.log(_doc._id,'jj');
             state.isLogin = true;
             state.userId = _doc._id;
             state.userNickname = _doc.nickname;

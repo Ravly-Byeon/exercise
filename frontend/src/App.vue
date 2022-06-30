@@ -5,7 +5,9 @@
     <v-main>
       <router-view/>
     </v-main>
-    <AddBtn/>
+    <AddBtn
+        v-if="this.$store.state.login.isLogin"
+    />
   </v-app>
 </template>
 

@@ -12,64 +12,52 @@
         ></v-text-field>
       </v-col>
     </v-row>
-  <template>
-    <div class="div-box">
-      <v-row
-          v-for="(e,i) in categories.length/3"
-          :key="i"
-
-      >
-        <v-col class="col-Box" sm
-                v-for="(ee,ii) in categories.length/4"
-               :key="ii"
-        >
-          <div
-           class="col-border"
-          >
-            {{categories[(i*3)+ee-1]}}
-          </div>
-        </v-col >
-      </v-row>
-    </div>
-  </template>
+  <SearchCategory
+    :categories="categories"
+    @click-category="clickCategory"
+    v-if="selectCategory===''"
+    :key="selectCategory"
+    />
+    <BoardListView
+      v-if="selectCategory!==''"
+      :key="selectCategory"
+      :selectCategory="selectCategory"
+      />
   </v-container>
 </template>
 
 <script lang="ts">
 import {Component, Vue} from "vue-property-decorator";
+import SearchCategory from "@/components/SearchCategory.vue";
+import BoardListView from "@/views/board/BoardListView.vue";
 
-@Component({})
+@Component({
+  components: {
+    SearchCategory,
+    BoardListView,
+  }
+})
 export default class SearchView extends Vue{
   categories: any[] = [];
+  selectCategory = '';
   created(){
     this.categorySet();
   }
 
   async categorySet(){
     this.categories = [];
-    console.log('cate')
+    this.selectCategory='';
     const {data} = await this.axios.get('/category');
     console.log(data, data.length);
     data.forEach((e: any,i: number) =>{
-      this.categories.push(e.name);
+      this.categories.push(e);
     });
-    console.log(this.categories, this.categories.length);
+  }
+
+  clickCategory(id:string){
+    this.selectCategory = id;
   }
 
 }
 </script>
 
-<style scoped>
-div.div-box{
-  padding: 50px;
-  text-align: center;
-}
-div.col-border{
-  padding: 30px;
-  border-radius: 4px;
-  box-shadow: 0px 0px 5px rgb(173, 139, 115);
-  color: rgb(173, 139, 115);
-
-}
-
-</style>

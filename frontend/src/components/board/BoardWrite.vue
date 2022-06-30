@@ -13,6 +13,8 @@
         <v-select
             v-model="category"
             :items="categories"
+            item-text="name"
+            item-value="_id"
             label="Category"
             required
         ></v-select>
@@ -110,14 +112,13 @@
       <v-col
         cols="12"
         >
-        <div>
-          <img
-            :url="images"/>
-        </div>
-        <hr/>
-        <div :style="`background-image: url(${images})`">
-
-        </div>
+        <v-btn
+            depressed
+            color="warning"
+            @click="catching"
+        >
+          CAtch
+          </v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -144,20 +145,17 @@ export default class BoardWrite extends Vue{
 
   async categorySet(){
     this.categories = [];
-    console.log('cate')
     const {data} = await this.axios.get('/category');
-    console.log(data, data.length);
     data.forEach((e: any,i: number) =>{
-      this.categories.push(e.name);
+      this.categories.push(e);
     });
     console.log(this.categories);
   }
 
   async submit(){
-    console.log('submit');
-    await this.uploadFile();
-
-    console.log(this.uploadFiles);
+    if(this.files.length){
+      await this.uploadFile();
+    }
 
     const { data } = await this.axios.post('/boards', {
       _id_user: this.$store.state.login.userId,
@@ -192,6 +190,9 @@ export default class BoardWrite extends Vue{
     this.files = [];
   }
 
+  catching(){
+    console.log(this.category);
+  }
 
 
 

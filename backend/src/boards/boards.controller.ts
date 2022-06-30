@@ -20,8 +20,9 @@ export class BoardsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.boardsService.findOne(+id);
+  findCategory(@Param('id') id: string) {
+    console.log(id,'cago');
+    return this.boardsService.findOne(id);
   }
 
   @Patch(':id')

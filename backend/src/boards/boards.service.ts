@@ -32,8 +32,11 @@ export class BoardsService {
     }).sort({createAt:-1}).exec();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} board`;
+  async findOne(category: string) {
+    return await this.boardModel.find({
+      isUse:true,
+      category: category,
+    }).sort({createAt:-1}).exec();
   }
 
   update(id: number, updateBoardDto: UpdateBoardDto) {

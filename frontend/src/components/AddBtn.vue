@@ -1,15 +1,17 @@
 <template>
-  <v-btn
-      class="mx-2 fixed"
-      fab
-      dark
-      color="indigo"
-      @click="move"
-    >
-      <v-icon dark>
-        mdi-plus
-      </v-icon>
+  <div class="btn-div">
+    <v-btn
+        class="mx-2 fixed"
+        fab
+        dark
+        color="indigo"
+        @click="move"
+      >
+        <v-icon dark>
+          mdi-plus
+        </v-icon>
     </v-btn>
+  </div>
 </template>
 
 <script lang="ts">
@@ -25,3 +27,12 @@ export default class AddBtn extends Vue{
 
 }
 </script>
+
+<style scoped>
+.btn-div{
+  position: fixed;
+  bottom: 50px;
+  left: 50px;
+  z-index: 999;
+}
+</style>

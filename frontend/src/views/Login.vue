@@ -80,8 +80,10 @@ export default class LoginForm extends Vue {
       password: this.loginPw,
     });
     console.log(data,'--');
-    this.$store.dispatch('login/login',data);
-    console.log(this.$store.state.login.userEmail);
+    if(data!=='N'){
+      this.$store.dispatch('login/login',data);
+      console.log(this.$store.state.login.userEmail);
+    }
     if(this.$store.state.login.userEmail && this.$store.state.login.isLogin){
       this.$emit('loginPop', false);
     }

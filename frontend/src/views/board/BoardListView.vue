@@ -1,11 +1,13 @@
 <template>
   <v-container>
-    <BoardListTable/>
+    <BoardListTable
+        :selectCategory="selectCategory"
+    />
   </v-container>
 </template>
 
 <script lang="ts">
-import {Component, Vue} from "vue-property-decorator";
+import {Component, Prop, Vue} from "vue-property-decorator";
 import BoardListTable from "@/components/board/BoardListTable.vue";
 
 @Component({
@@ -14,6 +16,7 @@ import BoardListTable from "@/components/board/BoardListTable.vue";
   }
 })
 export default class BoardListView extends Vue{
+  @Prop() selectCategory!: string;
 
 }
 </script>
