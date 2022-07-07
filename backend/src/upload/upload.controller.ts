@@ -92,4 +92,5 @@ export class UploadController {
     const file = createReadStream(join(process.cwd(), 'package.json'));
     return new StreamableFile(file);
   }
+
 }

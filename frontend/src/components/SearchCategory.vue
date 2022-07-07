@@ -28,8 +28,11 @@ export default class SearchCategory extends Vue{
   @Prop() categories!: any[];
 
   clickCategory(id:string){
-    this.$emit('click-category',id);
-
+    //this.$emit('click-category',id);
+    console.log(id);
+    this.$store.dispatch('board/selectCategory',{category: id});
+    console.log(this.$store.state.board.selectedCategory,'}}}');
+    this.$router.push('/boardList');
   }
 }
 </script>

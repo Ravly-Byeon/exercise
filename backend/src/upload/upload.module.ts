@@ -31,7 +31,6 @@ import {extname} from "path";
           },
           storage: diskStorage({
             destination: function (req, file, cb){
-              //const dest = `${config.get('ATTATCH_SAVE_PATH')}/${format(new Date(),'{yyyy}{MM}')}/`;
               const dest = 'public';
               if(!fs.existsSync(dest))  {
                 fs.mkdirSync(dest, { recursive: true });

@@ -14,13 +14,15 @@
           dense
         >
           <template #item="{item}">
-            <tr>
+            <tr class="tr-list">
               <td>
                 <div class="div-float">
-                  <div>hi</div>
+                  <div class="div-thumnail">hi</div>
                 </div>
                 <div class="div-float">
-                  <div>{{item.title}}</div>
+                  <div
+                      @click="contentView(item._id)"
+                  >{{item.title}}</div>
                   <div>{{item.price}}</div>
                   <div>{{item.createAt}}</div>
                   <div></div>
@@ -59,13 +61,24 @@ export default class BoardListTable extends Vue{
     console.log(this.boardList);
   }
 
+  contentView(id: string){
+    console.log(id);
+  }
+
 }
 </script>
 
 <style scoped>
+tr.tr-list{
+  padding: 10%;
+}
 div.div-float{
   height: 100%;
   border: 1px solid black;
   float: left;
+}
+
+div.div-thumnail{
+  width: 20%;
 }
 </style>

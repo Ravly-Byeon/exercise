@@ -29,6 +29,8 @@
     "@nestjs/mapped-types": "*",
     "@nestjs/mongoose": "^9.1.0",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/platform-socket.io": "^8.4.7",
+    "@nestjs/websockets": "^8.4.7",
     "@types/nodemailer": "^6.4.4",
     "bcrypt": "^5.0.1",
     "class-transformer": "^0.5.1",
@@ -37,6 +39,7 @@
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "express-generator": "^4.16.1",
+    "fs": "^0.0.1-security",
     "handlebars": "^4.7.7",
     "jsonwebtoken": "^8.5.1",
     "light-date": "^1.2.0",
@@ -48,7 +51,8 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
     "uuid": "^8.3.2",
-    "vuex-persistedstate": "^4.1.0"
+    "vuex-persistedstate": "^4.1.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

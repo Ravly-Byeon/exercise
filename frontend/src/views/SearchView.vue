@@ -18,11 +18,11 @@
     v-if="selectCategory===''"
     :key="selectCategory"
     />
-    <BoardListView
+    <!--<BoardListView
       v-if="selectCategory!==''"
       :key="selectCategory"
       :selectCategory="selectCategory"
-      />
+      /> -->
   </v-container>
 </template>
 
@@ -46,7 +46,6 @@ export default class SearchView extends Vue{
 
   async categorySet(){
     this.categories = [];
-    this.selectCategory='';
     const {data} = await this.axios.get('/category');
     console.log(data, data.length);
     data.forEach((e: any,i: number) =>{
